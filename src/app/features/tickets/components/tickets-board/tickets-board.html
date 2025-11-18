@@ -1,65 +1,70 @@
-<div class="bg-gray-900 rounded-xl p-6">
+<div class="bg-gray-900 rounded-xl p-6 w-full">
   <div class="flex items-center justify-between mb-6">
-    <h2 class="text-white text-lg">🎫 Tickets</h2>
+    <h2 class="text-white text-lg">Tickets</h2>
     <button class="bg-gray-800 text-white px-4 py-2 rounded-lg text-sm hover:bg-gray-700">
       + New Ticket
     </button>
   </div>
 
-  <div class="grid grid-cols-4 gap-4">
+  <!-- Reduced gap for more compact layout -->
+  <div class="grid grid-cols-4 gap-3">
     <!-- To Do Column -->
-    <div>
-      <div class="flex items-center justify-between mb-4">
+    <div class="flex flex-col">
+      <div class="flex items-center justify-between mb-3">
         <h3 class="text-gray-400 text-sm">To Do</h3>
         <span class="bg-gray-700 text-gray-300 text-xs px-2 py-1 rounded-full">
-              {{ todoTickets.length }}
-            </span>
+          {{ todoTickets().length }}
+        </span>
       </div>
-      <div class="space-y-3">
-        <app-ticket-card *ngFor="let ticket of todoTickets" [ticket]="ticket">
-        </app-ticket-card>
+      <div class="space-y-2">
+        @for (ticket of todoTickets(); track ticket.id) {
+          <app-ticket-card [ticket]="ticket" />
+        }
       </div>
     </div>
 
     <!-- Doing Column -->
-    <div>
-      <div class="flex items-center justify-between mb-4">
+    <div class="flex flex-col">
+      <div class="flex items-center justify-between mb-3">
         <h3 class="text-gray-400 text-sm">Doing</h3>
         <span class="bg-gray-700 text-gray-300 text-xs px-2 py-1 rounded-full">
-              {{ doingTickets.length }}
-            </span>
+          {{ doingTickets().length }}
+        </span>
       </div>
-      <div class="space-y-3">
-        <app-ticket-card *ngFor="let ticket of doingTickets" [ticket]="ticket">
-        </app-ticket-card>
+      <div class="space-y-2">
+        @for (ticket of doingTickets(); track ticket.id) {
+          <app-ticket-card [ticket]="ticket" />
+        }
       </div>
     </div>
 
     <!-- Done Column -->
-    <div>
-      <div class="flex items-center justify-between mb-4">
+    <div class="flex flex-col">
+      <div class="flex items-center justify-between mb-3">
         <h3 class="text-gray-400 text-sm">Done</h3>
         <span class="bg-gray-700 text-gray-300 text-xs px-2 py-1 rounded-full">
-              {{ doneTickets.length }}
-            </span>
+          {{ doneTickets().length }}
+        </span>
       </div>
-      <div class="space-y-3">
-        <app-ticket-card *ngFor="let ticket of doneTickets" [ticket]="ticket">
-        </app-ticket-card>
+      <div class="space-y-2">
+        @for (ticket of doneTickets(); track ticket.id) {
+          <app-ticket-card [ticket]="ticket" />
+        }
       </div>
     </div>
 
     <!-- HappyDay Column -->
-    <div>
-      <div class="flex items-center justify-between mb-4">
+    <div class="flex flex-col">
+      <div class="flex items-center justify-between mb-3">
         <h3 class="text-gray-400 text-sm">HappyDay</h3>
         <span class="bg-gray-700 text-gray-300 text-xs px-2 py-1 rounded-full">
-              {{ happydayTickets.length }}
-            </span>
+          {{ happydayTickets().length }}
+        </span>
       </div>
-      <div class="space-y-3">
-        <app-ticket-card *ngFor="let ticket of happydayTickets" [ticket]="ticket">
-        </app-ticket-card>
+      <div class="space-y-2">
+        @for (ticket of happydayTickets(); track ticket.id) {
+          <app-ticket-card [ticket]="ticket" />
+        }
       </div>
     </div>
   </div>

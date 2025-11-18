@@ -1,16 +1,15 @@
-import { Component} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import { Component, signal } from '@angular/core';
 import { TicketCard } from '../ticket-card/ticket-card';
 import { Ticket } from '../../models/ticket.model';
 
 @Component({
   selector: 'app-tickets-board',
-  imports: [CommonModule, TicketCard],
+  imports: [TicketCard],
   templateUrl: './tickets-board.html',
   styleUrl: './tickets-board.css',
 })
 export class TicketsBoard {
-  allTickets: Ticket[] = [
+  allTickets = signal<Ticket[]>([
     {
       id: '1',
       title: 'Setup staging environment',
@@ -37,7 +36,7 @@ export class TicketsBoard {
       title: 'Integrate SSO',
       status: 'done',
       priority: 'Low',
-      assignees: ['https://i.pravatar.cc/150?img=5']
+      assignees: ['https://i.pravatar.cc/150?img=1']
     },
     {
       id: '5',
@@ -52,23 +51,36 @@ export class TicketsBoard {
       status: 'doing',
       priority: 'Medium',
       assignees: ['https://i.pravatar.cc/150?img=7']
+    },
+    {
+      id: 'stringhere',
+      title: 'Refactor orders module',
+      status: 'happyday',
+      priority: 'Medium',
+      assignees: ['https://i.pravatar.cc/150?img=7']
+    },
+    {
+      id: '6',
+      title: 'Refactor auth module',
+      status: 'doing',
+      priority: 'Medium',
+      assignees: ['https://i.pravatar.cc/150?img=7']
     }
-  ];
+  ]);
 
-  get todoTickets() {
-    return this.allTickets.filter(t => t.status === 'todo');
+  todoTickets() {
+    return this.allTickets().filter(t => t.status === 'todo');
   }
 
-  get doingTickets() {
-    return this.allTickets.filter(t => t.status === 'doing');
+  doingTickets() {
+    return this.allTickets().filter(t => t.status === 'doing');
   }
 
-  get doneTickets() {
-    return this.allTickets.filter(t => t.status === 'done');
+  doneTickets() {
+    return this.allTickets().filter(t => t.status === 'done');
   }
 
-  get happydayTickets() {
-    return this.allTickets.filter(t => t.status === 'happyday');
+  happydayTickets() {
+    return this.allTickets().filter(t => t.status === 'happyday');
   }
-
 }
